@@ -19,15 +19,16 @@ The portfolio should be a **single-page website**. Build the sections below on o
 
 ## Visual direction
 
-- Primary palette: near-black/charcoal backgrounds, electric/cobalt blue highlights, cool white text, muted slate secondary text. Avoid the orange/purple palettes in the reference images; the requested black-and-blue palette takes precedence.
+- Primary palette (updated 2026-10-26 at the user's request): near-black backgrounds, neon cyan and bright electric blue highlights, cool white text, muted slate secondary text. Avoid the orange/purple palettes in the reference images; the requested black-and-blue palette takes precedence.
 - Strong typographic hierarchy, oversized display headings, crisp compact labels, generous spacing, layered panels/cards, subtle borders, blue glow used sparingly, and a polished gaming-inspired editorial feel.
 - The supplied references are in `inspirations/1.webp` and `inspirations/2.webp`. Use them for layout/energy cues, not as assets to copy. The first shows a bold gaming portfolio with large type, a featured player image, stats, biography, and event cards. The second shows a gaming hero, intro, social cards, video/content list, and image strip. Adapt only the sections supported by Kaushal's real information.
 - Do not use Valorant/esports team branding or imply professional esports status. The verified competitive detail is Minecraft Bedwars on ArchMC.
+- Copy is written in the first person, as Kaushal, as if he built the site himself.
 
 ## Privacy and portrait direction
 
 - No face reveal. Do not use or generate a realistic identifiable face for Kaushal.
-- A profile/hero image will be provided later. Until then, use a clearly replaceable placeholder such as an abstract blue-lit gaming silhouette, masked/anonymous avatar, geometric artwork, or a labeled image placeholder. Keep the image source easy to replace (for example `/public/images/kaushal-hero-placeholder.webp`).
+- In-game Minecraft screenshots now live in `public/images/gameplay/` (Minecraft skins only, no face reveal) and are used for the hero, gaming bento and gallery. Swap the hero picture through `heroShot` in `src/content/site.ts`; never replace it with a realistic face.
 - Do not repurpose the existing profile avatar as a face reveal unless the user supplies/approves that image for this site.
 
 ## Verified profile content from the existing page

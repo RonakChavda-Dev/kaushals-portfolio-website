@@ -1,9 +1,11 @@
 import Image from "next/image";
 import BedDefence from "@/components/BedDefence";
 import CopyHandle from "@/components/CopyHandle";
-import Reveal from "@/components/Reveal";
+import Gallery from "@/components/Gallery";
+import Logo from "@/components/Logo";
+import Motion from "@/components/Motion";
 import SiteNav from "@/components/SiteNav";
-import { about, credits, gaming, heroImage, links, person, skills } from "@/content/site";
+import { about, heroShot, links, nav, person, seo, siteUrl, skills } from "@/content/site";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 const newTab = <span className="sr-only"> (opens in a new tab)</span>;
@@ -12,10 +14,23 @@ const delay = (i: number) => ({ "--i": i }) as React.CSSProperties;
 const socials = [
   { service: "Twitch", value: "linga676767", note: "Streams", href: links.twitch },
   { service: "GitHub", value: "kdevarasetty7", note: "Code", href: links.github },
-  { service: "Spotify", value: "Listening profile", note: "Music", href: links.spotify },
+  { service: "Spotify", value: "My listening profile", note: "Music", href: links.spotify },
   { service: "Lichess", value: "kaushal_D", note: "Chess", href: links.lichess },
-  { service: "Discord server", value: "Join the community", note: "Community", href: links.discordInvite },
+  { service: "Discord server", value: "Join my community", note: "Community", href: links.discordInvite },
 ];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  alternateName: person.ign,
+  url: siteUrl,
+  image: `${siteUrl}/opengraph-image`,
+  description: seo.description,
+  email: `mailto:${links.email}`,
+  knowsAbout: ["Minecraft Bedwars", "HTML", "CSS", "Figma", "GitHub", "Python", "Arduino"],
+  sameAs: [links.twitch, links.github, links.spotify, links.lichess],
+};
 
 function Arrow() {
   return (
@@ -25,12 +40,46 @@ function Arrow() {
   );
 }
 
+function Letters({ text, from = 0 }: { text: string; from?: number }) {
+  return (
+    <>
+      {[...text].map((ch, i) => (
+        <span key={i} className="char" style={delay(from + i)} aria-hidden="true">
+          {ch}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function SectionHead({ id, kicker, title, lead }: { id: string; kicker: string; title: string; lead: string }) {
+  return (
+    <div className="section-head">
+      <p className="kicker" data-reveal>
+        <span aria-hidden="true">{kicker}</span>
+      </p>
+      <h2 id={id} className="section-title" data-reveal="clip" style={delay(1)}>
+        {title}
+      </h2>
+      <p className="section-lead" data-reveal style={delay(2)}>
+        {lead}
+      </p>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <a className="skip" href="#main">
         Skip to content
       </a>
+      <div className="ambient" aria-hidden="true">
+        <span className="orb orb-1" />
+        <span className="orb orb-2" />
+        <span className="grid-floor" />
+      </div>
       <SiteNav />
 
       <main id="main">
@@ -41,26 +90,35 @@ export default function Home() {
               <span className="tag-dot" aria-hidden="true" />
               Minecraft Bedwars · ArchMC
             </p>
-            <h1 id="hero-title" className="hero-title" aria-label={`${person.ign}, ${person.name}`} data-reveal style={delay(1)}>
-              <span>linga</span>
-              <span className="accent">676767</span>
+            <h1 id="hero-title" className="hero-title" aria-label={`${person.ign}, ${person.name}`}>
+              <span className="hero-line">
+                <Letters text="linga" />
+              </span>
+              <span className="hero-line neon">
+                <Letters text="676767" from={5} />
+              </span>
             </h1>
-            <p className="hero-lead" data-reveal style={delay(2)}>
-              <strong>{person.name}</strong> is a gamer first and a front-end developer second: top 10 in ArchMC&rsquo;s
-              4v4 Bedwars leaderboard, and learning to build clean, responsive sites.
+            <p className="hero-lead" data-reveal style={delay(4)}>
+              Hey, I&rsquo;m <strong>{person.name}</strong>. Gamer first, front-end developer second: I made the top 10
+              of ArchMC&rsquo;s 4v4 Bedwars leaderboard, and I&rsquo;m learning to build clean, responsive sites like this one.
             </p>
-            <div className="hero-actions" data-reveal style={delay(3)}>
+            <div className="hero-actions" data-reveal style={delay(5)}>
               <a className="btn btn-primary" href="#about">
                 Explore
               </a>
-              <a className="btn btn-ghost" href="#contact">
-                Contact
+              <a className="btn btn-ghost" href="#bed-lab">
+                Try the bed lab
+              </a>
+              <a className="btn btn-link" href="#contact">
+                Contact <Arrow />
               </a>
             </div>
-            <dl className="hero-stats" data-reveal style={delay(4)}>
+            <dl className="hero-stats" data-reveal style={delay(6)}>
               <div>
                 <dt>ArchMC 4v4</dt>
-                <dd>Top 10</dd>
+                <dd>
+                  Top <span data-count="10">10</span>
+                </dd>
               </div>
               <div>
                 <dt>Profile badge</dt>
@@ -68,43 +126,55 @@ export default function Home() {
               </div>
               <div>
                 <dt>Stars in @Arch</dt>
-                <dd>110+</dd>
+                <dd>
+                  <span data-count="110">110</span>+
+                </dd>
               </div>
             </dl>
           </div>
 
-          <figure className="hero-card" data-reveal style={delay(2)}>
-            <div className="hero-art">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} fetchPriority="high" />
-            </div>
-            <figcaption className="hero-card-bar">
-              <span>
-                <span className="muted">IGN</span> {person.ign}
-              </span>
-              <span className="muted">Placeholder art · no face reveal</span>
-            </figcaption>
-          </figure>
+          <div className="hero-visual" data-reveal="scale" style={delay(3)}>
+            <figure className="hero-card" data-tilt>
+              <div className="hero-art">
+                <Image src={heroShot.src} alt={heroShot.alt} fill priority sizes="(max-width: 900px) 100vw, 46vw" />
+                <span className="scan" aria-hidden="true" />
+              </div>
+              <figcaption className="hero-card-bar">
+                <span>
+                  <span className="muted">IGN</span> {person.ign}
+                </span>
+                <span className="live-dot">In-game</span>
+              </figcaption>
+            </figure>
+            <p className="float-chip chip-a" aria-hidden="true">
+              <span className="chip-k">Rank</span> Top 10 · 4v4
+            </p>
+            <p className="float-chip chip-b" aria-hidden="true">
+              <span className="chip-k">Badge</span> {person.badge}
+            </p>
+          </div>
+
+          <a className="scroll-cue" href="#about" aria-label="Scroll to About">
+            <span aria-hidden="true" />
+          </a>
         </section>
 
         {/* ---------- About ---------- */}
         <section className="section container about" id="about" aria-labelledby="about-title">
           <div className="about-intro">
-            <h2 id="about-title" className="section-title" data-reveal>
-              Off the server
-            </h2>
-            <p className="section-lead" data-reveal style={delay(1)}>
-              Away from the bed he is defending, Kaushal is an Indian high-school student living in Australia, with a soft
-              spot for science, chess and badminton.
-            </p>
-            <p className="about-aside" data-reveal style={delay(2)}>
-              He would also like you to know the gaming setup is the floor and the mouse came from an office. The top 10
-              happened anyway.
+            <SectionHead
+              id="about-title"
+              kicker="01 · About"
+              title="Off the server"
+              lead="Away from the bed I'm defending, I'm an Indian high-school student living in Australia, with a soft spot for science, chess and badminton."
+            />
+            <p className="about-aside" data-reveal style={delay(3)}>
+              Fair warning: my gaming setup is the floor and my mouse came from an office. The top 10 happened anyway.
             </p>
           </div>
           <ul className="interests">
             {about.map((item, i) => (
-              <li key={item.title} className="card interest" data-reveal style={delay(i % 2)}>
+              <li key={item.title} className="card interest" data-spot data-reveal style={delay(i % 3)}>
                 <div className="interest-art">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={item.icon} alt="" width="300" height="260" loading="lazy" />
@@ -121,28 +191,22 @@ export default function Home() {
 
         {/* ---------- Gaming ---------- */}
         <section className="section container gaming" id="gaming" aria-labelledby="gaming-title">
-          <div className="section-head">
-            <h2 id="gaming-title" className="section-title" data-reveal>
-              Bedwars on ArchMC
-            </h2>
-            <p className="section-lead" data-reveal style={delay(1)}>
-              A personal best on a public Minecraft server, earned in his own time. Not a pro team, not an esports
-              contract, just a lot of beds broken and defended.
-            </p>
-          </div>
+          <SectionHead
+            id="gaming-title"
+            kicker="02 · Gaming"
+            title="Bedwars on ArchMC"
+            lead="A personal best on a public Minecraft server, earned in my own time. Not a pro team, not an esports contract, just a lot of beds broken and defended."
+          />
 
           <div className="bento">
-            <article className="card feature" data-reveal>
-              <Image
-                className="feature-img"
-                src={gaming.feature.img}
-                alt={gaming.feature.alt}
-                fill
-                sizes="(max-width: 900px) 100vw, 60vw"
-              />
+            <article className="card feature" data-spot data-reveal="scale">
+              <Image className="feature-img" src="/images/gameplay/4.png" alt="" fill sizes="(max-width: 900px) 100vw, 60vw" />
               <div className="feature-body">
-                <p className="feature-big">Top 10</p>
-                <p className="feature-sub">4v4 leaderboard on ArchMC</p>
+                <p className="feature-kicker">Leaderboard</p>
+                <p className="feature-big">
+                  Top <span className="neon" data-count="10">10</span>
+                </p>
+                <p className="feature-sub">4v4 Bedwars on ArchMC</p>
                 <ul className="chips">
                   <li>Minecraft Bedwars</li>
                   <li>4v4</li>
@@ -151,49 +215,56 @@ export default function Home() {
               </div>
             </article>
 
-            <article className="card player" data-reveal style={delay(1)}>
+            <article className="card player" data-spot data-reveal style={delay(1)}>
               <h3 className="card-label">In-game name</h3>
               <p className="player-ign">{person.ign}</p>
-              <p className="player-note">Plays Minecraft Bedwars from the floor, with a basic office mouse.</p>
+              <p className="player-note">You&rsquo;ll find me in Bedwars, playing from the floor with a basic office mouse.</p>
               <div className="player-stats">
                 <div className="mini">
                   <span className="mini-value">{person.badge}</span>
                   <span className="mini-label">Profile badge</span>
                 </div>
                 <div className="mini">
-                  <span className="mini-value">110+</span>
+                  <span className="mini-value">
+                    <span data-count="110">110</span>+
+                  </span>
                   <span className="mini-label">Stars in @Arch</span>
                 </div>
               </div>
             </article>
+          </div>
 
-            {gaming.shots.map((shot, i) => (
-              <figure key={shot.img} className={`card shot${i === 0 ? " crop-top" : ""}`} data-reveal style={delay(i)}>
-                <Image src={shot.img} alt={shot.alt} fill sizes="(max-width: 700px) 100vw, 33vw" style={{ objectPosition: shot.pos }} />
-                <figcaption>{shot.label}</figcaption>
-              </figure>
-            ))}
+          <div className="gallery-head" data-reveal>
+            <h3>From my screenshots</h3>
+            <p>Tap any shot to open it.</p>
+          </div>
+          <Gallery />
+        </section>
 
-            <div className="card bed-card" data-reveal>
-              <BedDefence />
-            </div>
+        {/* ---------- Bed lab ---------- */}
+        <section className="section container bed-lab" id="bed-lab" aria-labelledby="bed-title">
+          <SectionHead
+            id="bed-title"
+            kicker="03 · Bed lab"
+            title="Build a bed defence"
+            lead="Every Bedwars game starts the same way: wrap your bed in blocks before someone comes for it. I made this to work out how long a defence really holds. Stack up to five layers and see the time with bare hands, with tools, and how much TNT it takes."
+          />
+          <div className="card lab-card" data-reveal>
+            <BedDefence />
           </div>
         </section>
 
         {/* ---------- Skills ---------- */}
         <section className="section container skills" id="skills" aria-labelledby="skills-title">
-          <div className="section-head">
-            <h2 id="skills-title" className="section-title" data-reveal>
-              Skills &amp; tools
-            </h2>
-            <p className="section-lead" data-reveal style={delay(1)}>
-              He writes clean, responsive front-end code with HTML and CSS, designs in Figma and works in GitHub every
-              day. Arduino and Python are the current homework.
-            </p>
-          </div>
+          <SectionHead
+            id="skills-title"
+            kicker="04 · Skills"
+            title="Skills & tools"
+            lead="I write clean, responsive front-end code with HTML and CSS, design in Figma and use GitHub every day. Arduino and Python are what I'm learning right now."
+          />
           <ul className="skill-grid">
             {skills.map((s, i) => (
-              <li key={s.name} className="card skill" data-reveal style={delay(i % 4)}>
+              <li key={s.name} className="card skill" data-spot data-reveal style={delay(i % 4)}>
                 <span className="badge" data-status={s.status}>
                   {s.status}
                 </span>
@@ -203,8 +274,8 @@ export default function Home() {
             ))}
             <li className="card skill skill-note" data-reveal style={delay(3)}>
               <p>
-                Statuses come straight from his profile. CSS is from his own description, which doesn&rsquo;t say how
-                often.
+                The labels are the same ones on my profile. CSS doesn&rsquo;t have one there, so I&rsquo;ve left it
+                unrated.
               </p>
             </li>
           </ul>
@@ -212,17 +283,20 @@ export default function Home() {
 
         {/* ---------- Connect ---------- */}
         <section className="section container contact" id="contact" aria-labelledby="contact-title">
-          <div className="section-head">
-            <h2 id="contact-title" className="section-title" data-reveal>
-              Let&rsquo;s connect
-            </h2>
-            <p className="section-lead" data-reveal style={delay(1)}>
-              Catch him on stream, on GitHub, on Spotify or over a game of chess. Email works too.
-            </p>
-          </div>
+          <SectionHead
+            id="contact-title"
+            kicker="05 · Contact"
+            title="Let's connect"
+            lead="Catch me on stream, on GitHub, on Spotify or over a game of chess. Email works too."
+          />
 
           <div className="connect">
-            <a className="card connect-mail" href={`mailto:${links.email}?subject=${encodeURIComponent("Hi Kaushal")}`} data-reveal>
+            <a
+              className="card connect-mail"
+              href={`mailto:${links.email}?subject=${encodeURIComponent("Hi Kaushal")}`}
+              data-spot
+              data-reveal
+            >
               <span className="card-label">Email</span>
               <span className="mail-address">{links.email}</span>
               <span className="mail-cta">
@@ -230,14 +304,14 @@ export default function Home() {
               </span>
             </a>
 
-            <div className="card connect-discord" data-reveal style={delay(1)}>
+            <div className="card connect-discord" data-spot data-reveal style={delay(1)}>
               <span className="card-label">Discord username</span>
               <span className="discord-handle">{links.discordHandle}</span>
               <CopyHandle handle={links.discordHandle} />
             </div>
 
             {socials.map((s, i) => (
-              <a key={s.service} className="card social" href={s.href} {...external} data-reveal style={delay(i % 3)}>
+              <a key={s.service} className="card social" href={s.href} {...external} data-spot data-reveal style={delay(i % 3)}>
                 <span className="card-label">{s.note}</span>
                 <span className="social-name">
                   {s.service}
@@ -254,34 +328,35 @@ export default function Home() {
       <footer className="footer">
         <div className="container footer-inner">
           <div className="footer-top">
-            <p className="footer-sign">GG. Thanks for stopping by.</p>
-            <a className="btn btn-ghost" href="#top">
-              Back to top
-            </a>
+            <div className="footer-brand">
+              <Logo size={48} />
+              <p className="footer-sign">GG. Thanks for stopping by.</p>
+            </div>
+            <ul className="footer-nav">
+              {nav.map((n) => (
+                <li key={n.href}>
+                  <a href={n.href}>{n.label}</a>
+                </li>
+              ))}
+              <li>
+                <a href="#top">Back to top ↑</a>
+              </li>
+            </ul>
           </div>
           <p className="credits">
-            Minecraft screenshots from Wikimedia Commons:{" "}
-            {credits.map((c, i) => (
-              <span key={c.page}>
-                <a href={c.page} {...external}>
-                  &ldquo;{c.title}&rdquo;{newTab}
-                </a>{" "}
-                by {c.creator},{" "}
-                <a href={c.licenseUrl} {...external}>
-                  {c.license}
-                  {newTab}
-                </a>
-                {i < credits.length - 1 ? "; " : "."}
-              </span>
-            ))}{" "}
-            Minecraft is a trademark of Mojang; this is a fan&rsquo;s personal site. Voxel artwork is a placeholder drawn
-            for this page.
+            Screenshots are my own. Minecraft is a trademark of Mojang; this is my personal fan site and isn&rsquo;t
+            affiliated with Mojang or ArchMC.
           </p>
           <p className="legal">
             <span>
               &copy; {new Date().getFullYear()} {person.name}
             </span>
-            <span>Built with Next.js</span>
+            <span>Designed and built by me (Kaushal Devarasetty) with{" "}
+              <a className="credit-link" href="https://ronakchavda.dev" {...external}>
+                Ronak Chavda
+                {newTab}
+              </a>
+            </span>
           </p>
         </div>
         <p className="footer-word" aria-hidden="true">
@@ -289,7 +364,7 @@ export default function Home() {
         </p>
       </footer>
 
-      <Reveal />
+      <Motion />
     </>
   );
 }

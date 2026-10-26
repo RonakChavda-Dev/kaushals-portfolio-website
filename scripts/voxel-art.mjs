@@ -52,7 +52,7 @@ function render(boxes, { unit = 40, pad = 60, glow = true, bounds, extras = () =
   const vb = [minX - pad, minY - pad, maxX - minX + pad * 2, maxY - minY + pad * 2];
   const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
   const glowSvg = glow
-    ? `<defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3d82ff" stop-opacity="0.45"/><stop offset="0.55" stop-color="#3d82ff" stop-opacity="0.12"/><stop offset="1" stop-color="#3d82ff" stop-opacity="0"/></radialGradient></defs><ellipse cx="${cx}" cy="${cy}" rx="${(maxX - minX) * 0.62}" ry="${(maxY - minY) * 0.62}" fill="url(#g)"/>`
+    ? `<defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#22d3ff" stop-opacity="0.45"/><stop offset="0.55" stop-color="#22d3ff" stop-opacity="0.12"/><stop offset="1" stop-color="#22d3ff" stop-opacity="0"/></radialGradient></defs><ellipse cx="${cx}" cy="${cy}" rx="${(maxX - minX) * 0.62}" ry="${(maxY - minY) * 0.62}" fill="url(#g)"/>`
     : "";
   return {
     project,
@@ -93,8 +93,8 @@ function island(size = 8) {
 
 {
   seed = 42;
-  const B = "#3d82ff";
-  const W = { top: "#6aa0ff" };
+  const B = "#2f7bff";
+  const W = { top: "#5fb4ff" };
   const boxes = [
     ...island(6),
     // defence wall of blue wool and end stone behind the bed
@@ -104,7 +104,7 @@ function island(size = 8) {
     box(0, 3, 2, 1, 1, 1, B, W),
     // the bed, long side towards the viewer: pillow end, then blanket
     box(0.4, 4.3, 1, 0.55, 1, 0.56, "#e9edf3", { top: "#ffffff" }),
-    box(0.95, 4.3, 1, 1.45, 1, 0.56, B, { top: "#5c98ff" }),
+    box(0.95, 4.3, 1, 1.45, 1, 0.56, B, { top: "#4fa3ff" }),
     box(0.4, 4.3, 1, 2, 1, 0.12, "#6b4a2a"),
     // player, Minecraft proportions, facing the viewer's left
     box(3.5, 2.4, 1, 0.5, 0.5, 1.5, "#141b2c"),
@@ -114,7 +114,7 @@ function island(size = 8) {
     box(4.5, 2.4, 2.5, 0.5, 0.5, 1.5, "#1f2a44", { top: "#31406a" }),
     box(3.5, 2.15, 4, 1, 1, 1, "#26324f", { top: "#3a4a6e" }),
     // visor across the face: masked, no face reveal
-    box(3.6, 3.15, 4.32, 0.8, 0.03, 0.26, B, { left: "#8fbaff", edges: false }),
+    box(3.6, 3.15, 4.32, 0.8, 0.03, 0.26, B, { left: "#7fe9ff", edges: false }),
     // sword in the right hand
     box(4.68, 2.9, 2.2, 0.14, 0.14, 0.14, "#6b4a2a"),
     box(4.58, 2.8, 2.34, 0.34, 0.34, 0.08, "#2b3550"),
@@ -150,7 +150,7 @@ const icons = {
   ],
   science: [
     ...plinth(),
-    box(0.75, 0.75, 0.6, 1.5, 1.5, 0.7, "#3d82ff", { top: "#7fb0ff" }),
+    box(0.75, 0.75, 0.6, 1.5, 1.5, 0.7, "#2f7bff", { top: "#6fd8ff" }),
     box(0.75, 0.75, 1.3, 1.5, 1.5, 0.3, "#c4d8ff"),
     box(1.2, 1.2, 1.6, 0.6, 0.6, 0.9, "#d6e4ff"),
     box(1.1, 1.1, 2.5, 0.8, 0.8, 0.14, "#e9edf3"),
@@ -158,7 +158,7 @@ const icons = {
   badminton: [
     ...plinth(),
     box(1.1, 1.1, 0.6, 0.8, 0.8, 0.5, "#f2f2ee"),
-    box(1.08, 1.08, 1.02, 0.84, 0.84, 0.12, "#3d82ff"),
+    box(1.08, 1.08, 1.02, 0.84, 0.84, 0.12, "#2f7bff"),
     box(1.0, 1.0, 1.14, 1.0, 1.0, 0.32, "#e6e8ef"),
     box(0.85, 0.85, 1.46, 1.3, 1.3, 0.32, "#eef0f5"),
     box(0.7, 0.7, 1.78, 1.6, 1.6, 0.3, "#f6f7fa"),
@@ -169,7 +169,7 @@ const icons = {
     box(1.0, 0.65, 0.6, 1.0, 1.7, 0.32, "#232c42", { top: "#2e3852" }),
     box(1.05, 0.8, 0.92, 0.9, 1.4, 0.2, "#2e3852", { top: "#3e4b70" }),
     box(1.48, 1.6, 1.12, 0.04, 0.6, 0.01, "#121827", { edges: false }),
-    box(1.42, 1.85, 1.12, 0.16, 0.24, 0.08, "#3d82ff", { top: "#6aa0ff" }),
+    box(1.42, 1.85, 1.12, 0.16, 0.24, 0.08, "#2f7bff", { top: "#5fb4ff" }),
   ],
   chess: [
     ...plinth(),
@@ -185,7 +185,7 @@ for (const [name, boxes] of Object.entries(icons)) {
 }
 
 // Favicon and header mark: a single blue wool block.
-const wool = render([box(0, 0, 0, 1, 1, 1, "#3d82ff", { top: "#6aa0ff" })], { unit: 18, pad: 2, glow: false }).svg();
+const wool = render([box(0, 0, 0, 1, 1, 1, "#2f7bff", { top: "#5fb4ff" })], { unit: 18, pad: 2, glow: false }).svg();
 writeFileSync(new URL("../src/app/icon.svg", import.meta.url), wool);
 writeFileSync(new URL("wool.svg", OUT), wool);
 console.log("art written");

@@ -4,3 +4,6 @@ out
 next-env.d.ts
 *.tsbuildinfo
 .taste-skill
+.env*.local
+.env
+.vercel

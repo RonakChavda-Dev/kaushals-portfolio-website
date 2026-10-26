@@ -1,24 +1,60 @@
 // Every fact, link and picture on the page lives here so it can be edited in one place.
 // Wording marked "as displayed" is copied from https://toxin.cc/linga676767; keep it unless Kaushal confirms a change.
 
+// The public address once the site is hosted. Canonical links, the sitemap and the link-preview image all hang off it,
+// so share embeds only work when it is the real domain. Set NEXT_PUBLIC_SITE_URL in the host's environment; otherwise
+// the domain Vercel, Netlify or Render provide is used, and localhost only in development.
+const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (vercel && `https://${vercel}`) ||
+  process.env.URL || // Netlify
+  process.env.RENDER_EXTERNAL_URL ||
+  "http://localhost:3000"
+).replace(/\/+$/, "");
+
 export const person = {
   name: "Kaushal Devarasetty",
+  firstName: "Kaushal",
   ign: "linga676767",
   badge: "OG", // as displayed
   stars: "110+ Stars in @Arch", // as displayed
 };
 
-// Placeholder artwork drawn by scripts/voxel-art.mjs. Swap `src` (and the size) for Kaushal's own image when it arrives.
-export const heroImage = {
-  src: "/images/art/kaushal-hero-placeholder.svg",
-  width: 697,
-  height: 560,
-  alt: "Placeholder artwork: a faceless, visor-masked blocky player with a sword stands on a floating island beside a blue bed, with the nametag linga676767 above their head",
+export const seo = {
+  title: "Kaushal Devarasetty · linga676767",
+  description:
+    "I'm Kaushal Devarasetty, linga676767 in Minecraft Bedwars. Top 10 on ArchMC's 4v4 leaderboard, and learning to build clean, responsive websites.",
+  keywords: [
+    "Kaushal Devarasetty",
+    "linga676767",
+    "Minecraft Bedwars",
+    "ArchMC",
+    "Bedwars 4v4",
+    "gamer portfolio",
+    "front-end developer",
+  ],
 };
+
+// In-game screenshots from Kaushal. Minecraft skins only, no face reveal.
+export const heroShot = {
+  src: "/images/gameplay/1.png",
+  width: 882,
+  height: 711,
+  alt: "Minecraft screenshot: my red-armoured Bedwars player up close, with the linga676767 nametag floating above",
+};
+
+export const shots = [
+  { src: "/images/gameplay/2.png", width: 486, height: 391, label: "Lobby", alt: "Minecraft screenshot: my player in sunglasses and a white jacket standing in a lobby under the linga676767 nametag, beside two other players" },
+  { src: "/images/gameplay/4.png", width: 512, height: 501, label: "Under the tricolour", alt: "Minecraft screenshot: my player in purple armour at night, linga676767 nametag above, with a block-built Indian flag on a tall pole behind" },
+  { src: "/images/gameplay/3.png", width: 391, height: 433, label: "Armour room", alt: "Minecraft screenshot: a player in a dark purple hooded outfit surrounded by armour stands in purple armour and a wall of coloured blocks" },
+  { src: "/images/gameplay/5.png", width: 525, height: 405, label: "Three of us", alt: "Minecraft screenshot: three players in purple and diamond armour standing together on a grassy field" },
+  { src: "/images/gameplay/6.png", width: 567, height: 506, label: "Red team", alt: "Minecraft screenshot: two red-team players in a wooden room, nametags not_yiggy and not_linga" },];
 
 export const nav = [
   { href: "#about", label: "About" },
   { href: "#gaming", label: "Gaming" },
+  { href: "#bed-lab", label: "Bed lab" },
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
@@ -37,43 +73,34 @@ export const about = [
   {
     title: "Heritage",
     role: "Indian, living in Australia",
-    text: "A high-school student from India, now in Australia, and proud of his Hindu heritage and culture.",
+    text: "I'm a high-school student from India, now living in Australia, and proud of my Hindu heritage and culture.",
     icon: "/images/art/heritage.svg",
   },
   {
     title: "Science",
     role: "Enthusiast",
-    text: "A science enthusiast. The Arduino on his learning list is that same curiosity, with wires attached.",
+    text: "I love science. Arduino is on my learning list for the same reason: it's curiosity with wires attached.",
     icon: "/images/art/science.svg",
   },
   {
     title: "Badminton",
-    role: "Washed, by his own account",
-    text: "He loves badminton, even if he will happily admit the skills have gone a little washed.",
+    role: "Washed, honestly",
+    text: "I love badminton. My skills are a little washed these days, but I'm still out there.",
     icon: "/images/art/badminton.svg",
   },
   {
     title: "The setup",
     role: "Floor gaming, office mouse",
-    text: "No battle station. He plays from the floor with a basic office mouse.",
+    text: "No battle station here. I play from the floor with a basic office mouse.",
     icon: "/images/art/setup.svg",
   },
   {
     title: "Chess",
     role: "kaushal_D on Lichess",
-    text: "When he is not guarding a bed, he has a Lichess account for slower games.",
+    text: "When I'm not guarding a bed, I'm on Lichess for slower games.",
     icon: "/images/art/chess.svg",
   },
 ];
-
-export const gaming = {
-  feature: { img: "/images/found/screenshot-from-the-minecraft-end.png", alt: "The End dimension in Minecraft: black obsidian pillars on pale end stone" },
-  shots: [
-    { img: "/images/found/minecraft-creeper.png", alt: "A creeper standing on sand beside water at night in Minecraft", label: "A creeper at night", pos: "50% 75%" },
-    { img: "/images/found/screenshot-from-the-minecraft-nether.png", alt: "The Nether in Minecraft: lava falls and fire on red netherrack", label: "The Nether", pos: "35% 50%" },
-    { img: "/images/found/minecraft-lush-caves.jpg", alt: "A lush cave in Minecraft with hanging vines and glow berries", label: "Lush caves", pos: "55% 40%" },
-  ],
-};
 
 // Status words exactly as shown on the existing profile. CSS has no status there, so it is marked as a stated skill.
 export const skills = [
@@ -86,9 +113,3 @@ export const skills = [
   { name: "Python", kind: "Programming", status: "Learning" },
 ];
 
-export const credits = [
-  { title: "Screenshot from the Minecraft End", creator: "Xbox México", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Screenshot_from_the_Minecraft_End.png", licenseUrl: "https://creativecommons.org/licenses/by/3.0" },
-  { title: "Minecraft Creeper", creator: "Xbox México", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Minecraft_Creeper.png", licenseUrl: "https://creativecommons.org/licenses/by/3.0" },
-  { title: "Screenshot from the Minecraft Nether", creator: "Xbox México", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Screenshot_from_the_Minecraft_Nether.png", licenseUrl: "https://creativecommons.org/licenses/by/3.0" },
-  { title: "Minecraft - Lush caves", creator: "Xbox México", license: "CC BY 3.0", page: "https://commons.wikimedia.org/wiki/File:Minecraft_-_Lush_caves.jpg", licenseUrl: "https://creativecommons.org/licenses/by/3.0" },
-];
