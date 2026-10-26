@@ -25,7 +25,7 @@ const jsonLd = {
   name: person.name,
   alternateName: person.ign,
   url: siteUrl,
-  image: `${siteUrl}/opengraph-image`,
+  image: `${siteUrl}/og.png`,
   description: seo.description,
   email: `mailto:${links.email}`,
   knowsAbout: ["Minecraft Bedwars", "HTML", "CSS", "Figma", "GitHub", "Python", "Arduino"],

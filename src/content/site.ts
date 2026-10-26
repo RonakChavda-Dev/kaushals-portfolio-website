@@ -3,13 +3,14 @@
 
 // The public address once the site is hosted. Canonical links, the sitemap and the link-preview image all hang off it,
 // so share embeds only work when it is the real domain. Set NEXT_PUBLIC_SITE_URL in the host's environment; otherwise
-// the domain Vercel, Netlify or Render provide is used, and localhost only in development.
+// the domain Vercel, Netlify, Render or Cloudflare Pages provide is used, and localhost only in development.
 const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ||
   (vercel && `https://${vercel}`) ||
   process.env.URL || // Netlify
   process.env.RENDER_EXTERNAL_URL ||
+  process.env.CF_PAGES_URL || // Cloudflare Pages (this deployment's *.pages.dev address)
   "http://localhost:3000"
 ).replace(/\/+$/, "");
 

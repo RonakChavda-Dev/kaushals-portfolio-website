@@ -18,6 +18,15 @@ const pixel = Pixelify_Sans({
   variable: "--font-pixelify",
 });
 
+// The link-preview card, generated at build time by src/app/og.png/route.tsx.
+const shareImage = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: "Kaushal Devarasetty, linga676767: Minecraft Bedwars, top 10 on ArchMC 4v4, and front-end developer",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: seo.title, template: `%s · ${person.name}` },
@@ -37,12 +46,15 @@ export const metadata: Metadata = {
     firstName: "Kaushal",
     lastName: "Devarasetty",
     username: person.ign,
+    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
     title: seo.title,
     description: seo.description,
+    images: [shareImage],
   },
+  icons: { apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }] },
   robots: {
     index: true,
     follow: true,

@@ -59,6 +59,7 @@ The maths lives in [`src/lib/bedwars.ts`](src/lib/bedwars.ts).
 - Plain global CSS with design tokens, no UI library
 - `next/font` (Archivo for display type, Pixelify Sans for small game-style labels)
 - `next/og` for the generated share image and Apple touch icon
+- Static export (`output: "export"`), so it deploys as plain files
 - Intersection Observer for scroll reveals and count-ups, all respecting `prefers-reduced-motion`
 
 ## Run it locally
@@ -67,12 +68,23 @@ The maths lives in [`src/lib/bedwars.ts`](src/lib/bedwars.ts).
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build
-npm start        # serve the build
+# the static site lands in out/
 ```
 
 ## Deploying
 
-The easiest route is **Vercel** (free): import the GitHub repo, keep the defaults (framework Next.js, `npm run build`), and deploy. Netlify, Render or any Node host running `npm run build && npm start` work too (Node 20.9+).
+The site is a **static export**: `npm run build` writes plain files to `out/`, so it runs on any static host.
+
+**Cloudflare Pages** (what I use):
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | None (or Next.js (Static HTML Export)) |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Environment variables | `NEXT_PUBLIC_SITE_URL` = your domain, and `NODE_VERSION` = `22` if the build complains about Node |
+
+Vercel, Netlify and GitHub Pages work too: point them at the same build command and the `out` folder.
 
 Set the live domain so canonical links, the sitemap and link previews point to it (see `.env.example`):
 
@@ -80,22 +92,21 @@ Set the live domain so canonical links, the sitemap and link previews point to i
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
-If it isn't set, the domain Vercel, Netlify or Render gives the site is used. A build with no domain at all prints a warning, because link previews would point at localhost.
+If it isn't set, the domain the host gives the site is used (on Cloudflare that is the deployment's own `*.pages.dev` address, so set the variable for a stable link). A build with no domain at all prints a warning, because link previews would point at localhost.
 
 ### Link previews (embeds)
 
-Paste the link in Discord, WhatsApp, X, iMessage or LinkedIn and it shows a 1200×630 card with my logo, `linga676767`, my name, the Top 10 badge and an in-game screenshot. The card is generated at build time from `src/app/opengraph-image.tsx`, and Discord draws its side stripe in the site's neon cyan. After deploying you can test it at [opengraph.xyz](https://www.opengraph.xyz/). Discord caches embeds, so a changed card can take a while to show up there.
+Paste the link in Discord, WhatsApp, X, iMessage or LinkedIn and it shows a 1200×630 card with my logo, `linga676767`, my name, the Top 10 badge and an in-game screenshot. The card is generated at build time as `/og.png` from `src/app/og.png/route.tsx`, and Discord draws its side stripe in the site's neon cyan. After deploying you can test it at [opengraph.xyz](https://www.opengraph.xyz/). Discord caches embeds, so a changed card can take a while to show up there.
 
 ### Also ready for hosting
 
-- Security headers (no framing, no MIME sniffing, HSTS, strict referrer), and the `X-Powered-By` header is off
-- AVIF/WebP image optimisation, with screenshots cached for a week
+- Security and cache headers in `public/_headers` (read by Cloudflare Pages and Netlify): no framing, no MIME sniffing, HSTS, strict referrer, long caching for built assets
 - A themed 404 page ("Bed broken")
 
 SEO that's already set up:
 
 - Title, description, keywords, canonical URL and robots rules
-- Open Graph + Twitter card with a generated 1200×630 preview image (`/opengraph-image`)
+- Open Graph + Twitter card with a generated 1200×630 preview image (`/og.png`)
 - `robots.txt`, `sitemap.xml` and a web app manifest
 - `Person` structured data (JSON-LD) linking my profiles
 - SVG favicon plus an Apple touch icon
@@ -109,8 +120,9 @@ src/
     page.tsx              the single page (all sections)
     globals.css           theme tokens, layout and animations
     icon.svg              the K. logo / favicon
-    opengraph-image.tsx   link-preview image
-    apple-icon.tsx  manifest.ts  robots.ts  sitemap.ts
+    og.png/route.tsx      link-preview image, built to /og.png
+    apple-touch-icon.png/route.tsx   home-screen icon
+    not-found.tsx  manifest.ts  robots.ts  sitemap.ts
   components/
     BedDefence.tsx        the bed lab
     Gallery.tsx           screenshot grid and lightbox

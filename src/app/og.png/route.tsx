@@ -3,14 +3,16 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { person } from "@/content/site";
 
-export const alt = "Kaushal Devarasetty, linga676767: Minecraft Bedwars, top 10 on ArchMC 4v4, and front-end developer";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+// Served as /og.png: a real .png file in the static export, so every host sends it with an image content type.
+// layout.tsx points the Open Graph and Twitter tags here.
+export const dynamic = "force-static";
+
+const size = { width: 1200, height: 630 };
 
 const asDataUrl = (data: Buffer, type: string) => `data:${type};base64,${data.toString("base64")}`;
 
 // The link preview (Discord, X, iMessage, LinkedIn...). Rendered once at build time.
-export default async function OpengraphImage() {
+export async function GET() {
   const [svg, png] = await Promise.all([
     readFile(join(process.cwd(), "src/app/icon.svg")),
     readFile(join(process.cwd(), "public/images/gameplay/1.png")),

@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { person, seo } from "@/content/site";
 
+// Rendered once at build time into a plain file (required by the static export).
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: seo.title,
@@ -12,7 +15,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#04060c",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml" },
-      { src: "/apple-icon", sizes: "180x180", type: "image/png" },
+      { src: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   };
 }
