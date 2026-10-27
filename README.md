@@ -167,6 +167,7 @@ src/
 public/
   images/gameplay/                  Kaushal's in-game screenshots
   images/art/                       voxel icons (drawn by scripts/voxel-art.mjs)
+  favicon.ico                       favicon fallback for browsers without SVG icons
   _headers                          security and cache headers
 ```
 
