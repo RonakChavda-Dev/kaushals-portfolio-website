@@ -135,7 +135,7 @@ export default function Home() {
 
           <div className="hero-visual" data-reveal="scale" style={delay(3)}>
             <figure className="hero-card" data-tilt>
-              <div className="hero-art">
+              <div className="hero-art" style={{ aspectRatio: `${heroShot.width} / ${heroShot.height}` }}>
                 <Image src={heroShot.src} alt={heroShot.alt} fill priority sizes="(max-width: 900px) 100vw, 46vw" />
                 <span className="scan" aria-hidden="true" />
               </div>

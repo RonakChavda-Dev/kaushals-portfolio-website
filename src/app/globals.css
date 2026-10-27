@@ -787,7 +787,6 @@ a.card:focus-visible {
 
 .hero-art {
   position: relative;
-  aspect-ratio: 882 / 711;
   border-radius: 20px;
   overflow: hidden;
   background: var(--surface);

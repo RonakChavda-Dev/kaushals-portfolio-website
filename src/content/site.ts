@@ -39,16 +39,16 @@ export const seo = {
 
 // In-game screenshots from Kaushal. Minecraft skins only, no face reveal.
 export const heroShot = {
-  src: "/images/gameplay/1.png",
-  width: 882,
-  height: 711,
-  alt: "Minecraft screenshot: my red-armoured Bedwars player up close, with the linga676767 nametag floating above",
+  src: "/images/gameplay/3.png",
+  width: 391,
+  height: 433,
+  alt: "Minecraft screenshot: my player in a dark purple hooded outfit surrounded by armour stands in purple armour and a wall of coloured blocks",
 };
 
 export const shots = [
   { src: "/images/gameplay/2.png", width: 486, height: 391, label: "Lobby", alt: "Minecraft screenshot: my player in sunglasses and a white jacket standing in a lobby under the linga676767 nametag, beside two other players" },
   { src: "/images/gameplay/4.png", width: 512, height: 501, label: "Under the tricolour", alt: "Minecraft screenshot: my player in purple armour at night, linga676767 nametag above, with a block-built Indian flag on a tall pole behind" },
-  { src: "/images/gameplay/3.png", width: 391, height: 433, label: "Armour room", alt: "Minecraft screenshot: a player in a dark purple hooded outfit surrounded by armour stands in purple armour and a wall of coloured blocks" },
+  { src: "/images/gameplay/1.png", width: 882, height: 711, label: "Up close", alt: "Minecraft screenshot: my red-armoured Bedwars player up close, with the linga676767 nametag floating above" },
   { src: "/images/gameplay/5.png", width: 525, height: 405, label: "Three of us", alt: "Minecraft screenshot: three players in purple and diamond armour standing together on a grassy field" },
   { src: "/images/gameplay/6.png", width: 567, height: 506, label: "Red team", alt: "Minecraft screenshot: two red-team players in a wooden room, nametags not_yiggy and not_linga" },];
 
