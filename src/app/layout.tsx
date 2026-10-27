@@ -54,7 +54,15 @@ export const metadata: Metadata = {
     description: seo.description,
     images: [shareImage],
   },
-  icons: { apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }] },
+  // Listed by hand: setting `icons` stops Next from adding the icon.svg link on its own.
+  // public/favicon.ico (16/32/48, made from the apple-touch icon) covers browsers without SVG favicons.
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "48x48" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   robots: {
     index: true,
     follow: true,
