@@ -121,8 +121,8 @@ export default function Home() {
                 </dd>
               </div>
               <div>
-                <dt>Profile badge</dt>
-                <dd>{person.badge}</dd>
+                <dt>Profile rank</dt>
+                <dd>{person.rank}</dd>
               </div>
               <div>
                 <dt>Stars in @Arch</dt>
@@ -150,7 +150,7 @@ export default function Home() {
               <span className="chip-k">Rank</span> Top 10 · 4v4
             </p>
             <p className="float-chip chip-b" aria-hidden="true">
-              <span className="chip-k">Badge</span> {person.badge}
+              <span className="chip-k">Badge</span> {person.rank}
             </p>
           </div>
 
@@ -221,8 +221,8 @@ export default function Home() {
               <p className="player-note">You&rsquo;ll find me in Bedwars, playing from the floor with a basic office mouse.</p>
               <div className="player-stats">
                 <div className="mini">
-                  <span className="mini-value">{person.badge}</span>
-                  <span className="mini-label">Profile badge</span>
+                  <span className="mini-value">{person.rank}</span>
+                  <span className="mini-label">Profile rank</span>
                 </div>
                 <div className="mini">
                   <span className="mini-value">
@@ -265,7 +265,7 @@ export default function Home() {
           <ul className="skill-grid">
             {skills.map((s, i) => (
               <li key={s.name} className="card skill" data-spot data-reveal style={delay(i % 4)}>
-                <span className="badge" data-status={s.status}>
+                <span className="rank" data-status={s.status}>
                   {s.status}
                 </span>
                 <h3>{s.name}</h3>
