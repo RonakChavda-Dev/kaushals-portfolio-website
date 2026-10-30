@@ -36,7 +36,7 @@ The portfolio should be a **single-page website**. Build the sections below on o
 Current profile: <https://toxin.cc/linga676767>
 
 - Name: **Kaushal Devarasetty**
-- Current profile badge/position: **Majestic** (preserve the label as displayed; do not expand the acronym without confirmation).
+- Current profile rank: **Majestic** (preserve the label as displayed; do not expand the acronym without confirmation).
 - Profile stat: **110+ Stars in @Arch** (keep the displayed wording; do not reinterpret what the stars measure).
 - Gaming identity / IGN: **linga676767**
 - Game: Minecraft Bedwars
@@ -93,7 +93,7 @@ Only add a projects, videos, or social-stat section if real items or verified me
 
 ## Content and implementation guardrails
 
-- Preserve the displayed position/badge **Majestic** and **110+ Stars in @Arc** exactly unless Kaushal confirms a better wording.
+- Preserve the displayed rank **Majestic** and **110+ Stars in @Arc** exactly unless Kaushal confirms a better wording.
 - Do not claim professional gamer, esports player, advanced programmer, or skills beyond the evidence above.
 - Do not invent a biography, project list, social follower counts, age, school, city, or contact details.
 - Do not reveal a face or imply that the placeholder is Kaushal's real photo.

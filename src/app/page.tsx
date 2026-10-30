@@ -150,7 +150,7 @@ export default function Home() {
               <span className="chip-k">Rank</span> Top 10 · 4v4
             </p>
             <p className="float-chip chip-b" aria-hidden="true">
-              <span className="chip-k">Badge</span> {person.rank}
+              <span className="chip-k">Rank</span> {person.rank}
             </p>
           </div>
 
@@ -265,7 +265,7 @@ export default function Home() {
           <ul className="skill-grid">
             {skills.map((s, i) => (
               <li key={s.name} className="card skill" data-spot data-reveal style={delay(i % 4)}>
-                <span className="rank" data-status={s.status}>
+                <span className="badge" data-status={s.status}>
                   {s.status}
                 </span>
                 <h3>{s.name}</h3>

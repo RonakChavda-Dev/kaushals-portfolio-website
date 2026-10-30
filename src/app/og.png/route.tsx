@@ -33,7 +33,7 @@ export async function GET() {
 
   const stats = [
     { value: "Top 10", label: "ArchMC 4v4" },
-    { value: person.badge, label: "Badge" },
+    { value: person.rank, label: "Rank" },
     { value: "110+", label: "Stars in @Arch" }, // person.stars, split for the big number
   ];
 
