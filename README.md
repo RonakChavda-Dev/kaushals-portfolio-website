@@ -14,7 +14,7 @@ Designed and built by [Ronak Chavda](https://github.com/RonakChavda-Dev) for [Ka
 ![Static export](https://img.shields.io/badge/output-static%20export-22e5ff)
 ![Cloudflare Pages](https://img.shields.io/badge/hosted%20on-Cloudflare%20Pages-f38020?logo=cloudflare&logoColor=white)
 
-<img src=".github/preview.png" alt="Link preview card for the site: LINGA 676767, Gamer first, front-end developer second, Top 10 ArchMC 4v4, OG badge, 110+ Stars in @Arch, next to an in-game Minecraft screenshot" />
+<img src=".github/preview.png" alt="Link preview card for the site: LINGA 676767, Gamer first, front-end developer second, Top 10 ArchMC 4v4, Majestic Rank, 110+ Stars in @Arch, next to an in-game Minecraft screenshot" />
 
 </div>
 
@@ -35,7 +35,7 @@ Designed and built by [Ronak Chavda](https://github.com/RonakChavda-Dev) for [Ka
 
 This repository holds the source for Kaushal's personal website. It is a single-page site with a dark, neon-blue gaming look. It presents Kaushal as a gamer first and a front-end developer second.
 
-The copy on the site is written in the first person, in Kaushal's voice. Everything on it comes from his own profile: his IGN **linga676767**, his **top 10 spot on the ArchMC 4v4 Bedwars leaderboard**, his **OG** badge and **110+ Stars in @Arch**, his skills, and his links. There are no made-up projects or stats.
+The copy on the site is written in the first person, in Kaushal's voice. Everything on it comes from his own profile: his IGN **linga676767**, his **top 10 spot on the ArchMC 4v4 Bedwars leaderboard**, his **Majestic** rank and **110+ Stars in @Arch**, his skills, and his links. There are no made-up projects or stats.
 
 Kaushal's face is never shown on the site. Every picture of him is an in-game Minecraft screenshot.
 
@@ -114,7 +114,7 @@ Every fact, link and picture on the site lives in one file: [`src/content/site.t
 - Add or remove gallery screenshots in `public/images/gameplay/` and list them in `site.ts`.
 - Update the social links, skills and stats in the same file.
 
-Some wording is copied exactly from Kaushal's existing profile (for example **OG** and **110+ Stars in @Arch**). Keep it as it is unless Kaushal confirms a change.
+Some wording is copied exactly from Kaushal's existing profile (for example **110+ Stars in @Arch**). Keep it as it is unless Kaushal confirms a change.
 
 ## Deployment
 

@@ -18,7 +18,7 @@ export const person = {
   name: "Kaushal Devarasetty",
   firstName: "Kaushal",
   ign: "linga676767",
-  badge: "OG", // as displayed
+  badge: "Majestic", // as displayed
   stars: "110+ Stars in @Arch", // as displayed
 };
 
