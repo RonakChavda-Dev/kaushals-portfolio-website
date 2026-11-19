@@ -63,7 +63,7 @@ export const nav = [
 export const links = {
   email: "kaushal.hkd@gmail.com",
   discordHandle: "@m4sterfunkyboizz",
-  discordInvite: "https://discord.gg/tKUA5gJXM",
+  discordInvite: "https://discord.gg/Xuq6MYxrtA",
   twitch: "https://twitch.tv/linga676767",
   github: "https://github.com/kdevarasetty7",
   spotify: "https://open.spotify.com/user/31grbhw32dekt2z4s6gcnx4uul7y",
